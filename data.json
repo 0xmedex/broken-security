@@ -1,0 +1,14 @@
+[
+  {
+    "title": "First Article",
+    "author": "John",
+    "date": "2025-01-01",
+    "content": "This is the content of the first article."
+  },
+  {
+    "title": "Second Article",
+    "author": "Jane",
+    "date": "2025-01-02",
+    "content": "This is the content of the second article."
+  }
+]
