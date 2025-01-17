@@ -5,6 +5,25 @@
     "date": "2024-11-5",
     "image": "",
     "content": "html injection",
-    "fullContent": ""
+    "fullContent": '<h1>HTML Injection Writeup</h1>
+
+        <p>Hello,</p>
+        <p>I discovered an HTML Injection vulnerability that allowed me to create phishing pages, and in this write-up, I will explain how I found it. We will refer to the target as <code>example.com</code>.</p>
+
+        <p>First, I started with recon and found an endpoint that had a parameter named <code>url</code>. I began by testing SSRF, so I tried using this payload:</p>
+
+        <div class="highlight">
+            <code>::1</code>
+        </div>
+
+        <p>But it didn't work. I realized that the parameter's value had to be a link to an image. I tried inserting external image links, but they didn't work either, as the site only accepted links from a whitelist. It did accept links from a site we'll call <code>cdn.example.com</code>.</p>
+
+        <p>I accessed the site, logged in, uploaded an image, and took its link. When I inserted this link into the parameter, the image was displayed successfully! I tried uploading files with the <code>.svg</code> extension, and they were displayed.</p>
+
+        <p>I attempted to achieve XSS, but the CSP prevented it. So, I started trying to get HTML Injection using foreignObject, and I was successful . I tried to achieve an open redirect using a meta tag, but it didn’t work.I tried reading files via <code>embed</code>, but I didn't use <code>iframe</code> as it was blocked by the CSP. However, it didn't work, so I reported the vulnerability, and it was accepted as a Medium severity with a score of 6.1</p>
+
+        <div class="impact">
+            <div class="impact-title">Impact:</div>
+            <p>An attacker can create phishing pages and potentially use them for malware distribution.</p>'
   }
 ]
