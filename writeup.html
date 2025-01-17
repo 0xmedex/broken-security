@@ -50,66 +50,11 @@
     .read-more-btn:hover {
       background-color: #0056b3;
     }
-    .modal {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 80%;
-      max-width: 600px;
-      background: white;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-      z-index: 1000;
-    }
-    .modal.active {
-      display: block;
-    }
-    .modal-header {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-    .modal-content {
-      margin-bottom: 20px;
-    }
-    .close-btn {
-      background: #FF5F5F;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      padding: 5px 10px;
-      cursor: pointer;
-      float: right;
-    }
-    .overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 999;
-    }
-    .overlay.active {
-      display: block;
-    }
   </style>
 </head>
 <body>
   <h1>Welcome to Broken Security Blog</h1>
   <div id="blog-container"></div>
-
-  <!-- Modal -->
-  <div class="overlay" id="overlay"></div>
-  <div class="modal" id="modal">
-    <button class="close-btn" id="close-btn">Close</button>
-    <div class="modal-header" id="modal-title"></div>
-    <div class="modal-content" id="modal-content"></div>
-  </div>
 
   <script>
     // Fetch and display articles
@@ -117,13 +62,8 @@
       .then(response => response.json())
       .then(data => {
         const blogContainer = document.getElementById('blog-container');
-        const modal = document.getElementById('modal');
-        const overlay = document.getElementById('overlay');
-        const modalTitle = document.getElementById('modal-title');
-        const modalContent = document.getElementById('modal-content');
-        const closeBtn = document.getElementById('close-btn');
 
-        data.forEach((article, index) => {
+        data.forEach((article) => {
           const articleElement = document.createElement('div');
           articleElement.classList.add('article');
 
@@ -133,34 +73,10 @@
             <p><strong>Author:</strong> ${article.author}</p>
             <p><strong>Date:</strong> ${article.date}</p>
             <p>${article.content}</p>
-            <button class="read-more-btn" data-index="${index}">Read More</button>
+            <a href="${article.link}" class="read-more-btn">Read More</a>
           `;
 
           blogContainer.appendChild(articleElement);
-        });
-
-        // Open modal on "Read More"
-        document.addEventListener('click', (e) => {
-          if (e.target.classList.contains('read-more-btn')) {
-            const index = e.target.getAttribute('data-index');
-            const article = data[index];
-
-            modalTitle.textContent = article.title;
-            modalContent.textContent = article.fullContent;
-
-            modal.classList.add('active');
-            overlay.classList.add('active');
-          }
-        });
-
-        // Close modal
-        closeBtn.addEventListener('click', () => {
-          modal.classList.remove('active');
-          overlay.classList.remove('active');
-        });
-        overlay.addEventListener('click', () => {
-          modal.classList.remove('active');
-          overlay.classList.remove('active');
         });
       })
       .catch(error => console.error('Error loading data:', error));
