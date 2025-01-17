@@ -1,18 +1,10 @@
 [
   {
-    "title": "First Article",
-    "author": "John",
-    "date": "2025-01-01",
+    "title": "html injection",
+    "author": "Ahmed Attia",
+    "date": "2024-11-5",
     "image": "",
-    "content": "This is the content of the first article. Click 'Read More' to view the full content.",
-    "fullContent": "This is the full content of the first article. It contains more detailed information."
-  },
-  {
-    "title": "Second Article",
-    "author": "Jane",
-    "date": "2025-01-02",
-    "image": "",
-    "content": "This is the content of the second article. Click 'Read More' to view the full content.",
-    "fullContent": "This is the full content of the second article. It contains more detailed information."
+    "content": "html injection",
+    "fullContent": ""
   }
 ]
